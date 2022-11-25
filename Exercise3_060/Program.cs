@@ -135,7 +135,28 @@ namespace Exercise3_060
                     Console.WriteLine(currentNode.rollNumber + currentNode.next.name + "\n");
             }
         }
-
+        public void descending()
+        {
+            if (!listEmpty())
+                Console.WriteLine("\nList is empty");
+            else
+            {
+                Console.WriteLine("\nRecord in the descending order of" + "Roll number are:\n");
+                Node currentNode;
+                //membawa current node ke node paling belakang
+                currentNode = LAST;
+                while (currentNode.next != null)
+                {
+                    currentNode = currentNode.next;
+                }
+                //membawa data diri last node ke first node
+                while (currentNode != null)
+                {
+                    Console.WriteLine(currentNode.rollNumber + " " + currentNode.name + "\n");
+                    currentNode = currentNode.prev;
+                }
+            }
+        }
         public void traverse()/*Traverses all the nodes of the list*/
         {
             if (listEmpty())
