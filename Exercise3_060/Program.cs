@@ -12,12 +12,67 @@ namespace Exercise3_060
         public int rollNumber;
         public string name;
         public Node next;
+        public Node prev;
     }
     class CircularList
     {
         Node LAST;
+        public void addNode()
+        {
+            int nim;
+            string nm;
+            Console.WriteLine("\nEnter the roll number of the student: ");
+            nim = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("\nEnter the name of the student: ");
+            nm = Console.ReadLine();
+            Node newNode = new Node();
+            newNode.rollNumber = nim;
+            newNode.name = nm;
 
-        public CircularList()
+            //check if the list empty
+            if (LAST == null || nim <= LAST.rollNumber)
+            {
+                if ((LAST != null) && (nim == LAST.rollNumber))
+                {
+                    Console.WriteLine("\nDuplicate number not allowed");
+                    return;
+                }
+                newNode.next = LAST;
+                if (LAST != null)
+                    LAST.prev = newNode;
+                newNode.next = null;
+                LAST = newNode;
+                return;
+            }
+            /*if the node is to be inserted at between two node*/
+            Node previous, current;
+            for (current = previous = LAST;
+                current != null && nim >= current.rollNumber;
+                previous = current, current = current.next)
+            {
+                if (nim == current.rollNumber)
+                {
+                    Console.WriteLine("\nDuplicate roll numbers not allowed");
+                    return;
+                }
+            }
+            /*On the execution of the above for loop, prev and
+             * current will point to those nodes
+             * between which the new  node is to be inserted*/
+            newNode.next = current;
+            newNode.prev = previous;
+
+            //if the node id to be inserted at the end of the list
+            if (current == null)
+            {
+                newNode.next = null;
+                previous.next = newNode;
+                return;
+            }
+            current.prev = newNode;
+            previous.next = newNode;
+        }
+            public CircularList()
         {
             LAST = null;
         }
@@ -25,7 +80,7 @@ namespace Exercise3_060
         public bool Search(int rollNo, ref Node previous, ref Node current)
         /*Searches for the specified node*/
         {
-            for (previous = current = LAST.next; current != LAST; previous
+            for (previous = current = LAST.next; current != LAST; previous =
             current, current = current.next)
             {
                 if (rollNo == current.rollNumber)
@@ -100,13 +155,13 @@ namespace Exercise3_060
                                 prev = curr = null;
                                 Console.WriteLine("\nEnter the roll number of the student whose record is to be searched: ");
                                 int num = Convert.ToInt32(Console.ReadLine());
-                                if (obj.Search(num, ref prev, ResolveEventArgs curr) == false)
+                                if (obj.Search(num, ref prev, ref curr) == false)
                                     Console.WriteLine("\nRecord not found");
                                 else
                                 {
                                     Console.WriteLine("\nRecord found");
                                     Console.WriteLine("\nRoll number: " + curr.rollNumber);
-                                    Console.WriteLine("\mName: " + curr.name);
+                                    Console.WriteLine("\nName: " + curr.name);
                                 }
                             }
                             break;
