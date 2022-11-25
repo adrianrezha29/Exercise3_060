@@ -13,16 +13,29 @@ namespace Exercise3_060
         public string name;
         public Node next;
     }
-    class CircularList()
+    class CircularList
     {
         Node LAST;
 
-    public CircularList()
-    {
-        LAST = null;
+        public CircularList()
+        {
+            LAST = null;
+        }
+
+        public bool Search(int rollNo, ref Node previous, ref Node current)
+        /*Searches for the specified node*/
+        {
+            for (previous = current = LAST.next; current != LAST; previous
+            current, current = current.next)
+            {
+                if (rollNo == current.rollNumber)
+                    return (true);/*returns true if the node is found*/
+            }
+            if (rollNo == LAST.rollNumber)/*If the node is present at the end*/
+                return true;
+            else
+                return (false);/*returns false if the node is not found*/
+        }
+        public void traverse()/*Traverses all the nodes of the list*/
     }
-
-    public bool Search(int rollNo, ref Node previous, ref Node current)
-    /*Searches for the specified node*/
-
 }
