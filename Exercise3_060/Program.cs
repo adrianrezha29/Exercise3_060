@@ -36,6 +36,13 @@ namespace Exercise3_060
             else
                 return (false);/*returns false if the node is not found*/
         }
+        public bool listEmpty()
+        {
+            if (LAST == null)
+                return true;
+            else
+                return false;
+        }
         public void traverse()/*Traverses all the nodes of the list*/
         {
             if (listEmpty())
