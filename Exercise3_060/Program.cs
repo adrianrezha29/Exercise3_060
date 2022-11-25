@@ -8,8 +8,12 @@ namespace Exercise3_060
 {
     class Node
     {
-        static void Main(string[] args)
-        {
-        }
+        /*creates Nodes for the circular nexted list*/
+        public int rollNumber;
+        public string name;
+        public Node next;
+    }
+    class CircularList()
+    {
     }
 }
